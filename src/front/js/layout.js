@@ -4,6 +4,9 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
+import CharDetails from "./pages/charDetails";
+import PlanetDetails from "./pages/planetDetails";
+import VehicleDetails from "./pages/vehicleDetails";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -23,8 +26,10 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<CharDetails />} path="/charDetails/:id" />
+                        <Route element={<PlanetDetails />} path="/planetDetails/:id" />
+                        <Route element={<VehicleDetails />} path="/vehicleDetails/:id" />
+                        
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
