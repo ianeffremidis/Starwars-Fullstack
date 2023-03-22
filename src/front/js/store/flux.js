@@ -35,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  "Content-Type": "application/json"
 					}	
 				  };
-				  fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/all_characters", opts)
+				  fetch(process.env.BACKEND_URL + "/api/all_characters", opts)
 					.then((resp) => {
 					  if (resp.status === 200) return resp.json();
 					})
@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPlanets: () => {
 				try {
-					return fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/all_planets", {
+					return fetch(process.env.BACKEND_URL + "/api/all_planets", {
 						method: "GET",
 						redirect: "follow"
 					})
@@ -63,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getVehicles: () => {
 				try {
-					return fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/all_vehicles", {
+					return fetch(process.env.BACKEND_URL + "/api/all_vehicles", {
 						method: "GET",
 						redirect: "follow"
 					})
@@ -76,7 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPerson: id => {
 				try {
-					return fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/character/${id}`, {
+					return fetch(process.env.BACKEND_URL + `/api/character/${id}`, {
 						method: "GET",
 						redirect: "follow"
 					})
@@ -90,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getSinglePlanet: (id) => {
 				try {
-					return fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/planet/${id}`, {
+					return fetch(process.env.BACKEND_URL + `/api/planet/${id}`, {
 						method: "GET",
 						redirect: "follow"
 					})
@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getSingleVehicle: (id) => {
 				try {
-					return fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/vehicle/${id}`, {
+					return fetch(process.env.BACKEND_URL + `/api/vehicle/${id}`, {
 						method: "GET",
 						redirect: "follow"
 					})
@@ -164,7 +164,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						user_id: user_id
 					  }),
 				  };
-				  fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/get_all_fav", opts)
+				  fetch(process.env.BACKEND_URL + "/api/get_all_fav", opts)
 					.then((resp) => {
 					  if (resp.status === 200) return resp.json();
 					})
@@ -190,7 +190,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					char_id: char_id,
 				  }),
 				};
-				fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/add_fav_char", opts)
+				fetch(process.env.BACKEND_URL + "/api/add_fav_char", opts)
 				  .then((resp) => {
 					if (resp.status === 200) return resp.json();
 				  })
@@ -212,7 +212,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					planet_id: planet_id,
 				  }),
 				};
-				fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/add_fav_planet", opts)
+				fetch(process.env.BACKEND_URL + "/api/add_fav_planet", opts)
 				  .then((resp) => {
 					if (resp.status === 200) return resp.json();
 				  })
@@ -234,7 +234,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					veh_id: veh_id
 				  }),
 				};
-				fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/add_fav_veh", opts)
+				fetch(process.env.BACKEND_URL + "/api/add_fav_veh", opts)
 				  .then((resp) => {
 					if (resp.status === 200) return resp.json();
 				  })
@@ -256,7 +256,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  char_id: char_id
 					}),
 				  };
-				  fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/favorite/char/delete`, opts)
+				  fetch(process.env.BACKEND_URL + `/api/favorite/char/delete`, opts)
 					.then((resp) => {
 					  if (resp.status === 200) return resp.json();
 					})
@@ -280,7 +280,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  planet_id: planet_id
 					}),
 				  };
-				  fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/favorite/planet/delete`, opts)
+				  fetch(process.env.BACKEND_URL + `/api/favorite/planet/delete`, opts)
 					.then((resp) => {
 					  if (resp.status === 200) return resp.json();
 					})
@@ -303,7 +303,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  veh_id: veh_id
 					}),
 				  };
-				  fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/favorite/vehicle/delete`, opts)
+				  fetch(process.env.BACKEND_URL + `/api/favorite/vehicle/delete`, opts)
 					.then((resp) => {
 					  if (resp.status === 200) return resp.json();
 					})
@@ -328,7 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					password: password,
 				  }),
 				};
-				fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/login", opts)
+				fetch(process.env.BACKEND_URL + "/api/login", opts)
 				  .then((resp) => {
 					if (resp.status === 200) return resp.json();
 				  })
@@ -375,7 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					phone: phone
 				  }),
 				};
-				fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu92.gitpod.io/api/register", opts)
+				fetch(process.env.BACKEND_URL + "/api/register", opts)
 				  .then((resp) => {
 					if (resp.status === 200) return resp.json();
 				  })
