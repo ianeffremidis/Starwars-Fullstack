@@ -11,6 +11,11 @@ export const Navbar = () => {
 	const goLogin = () =>{
 		navigate("/login")
 	}
+	const logout = ()=>{
+		actions.logout()
+		window.location.reload(false);
+	}
+
 
 	useEffect(() => {
         actions.getFavourites(user_id)
@@ -49,8 +54,8 @@ export const Navbar = () => {
 							})
 							}
 							
-						</ul>
-						
+						</ul>	
+						<button type="button" className="btn btn-outline-danger me-5" onClick={logout}><i className="fa-solid fa-right-from-bracket"></i></button>				
 					</div>
 					 
 					 : 
