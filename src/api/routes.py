@@ -13,6 +13,44 @@ from flask_jwt_extended import JWTManager
 
 api = Blueprint('api', __name__)
 
+@api.route("/register", methods=["POST"])
+def register():
+    request_body = request.json
+    if (request_body["email"] == None):
+        return "The email is missing", 404
+    if (request_body["password"] == None):
+        return "The password name is missing", 404
+    if (request_body["name"] == None):
+        return "The name name is missing", 404
+    if (request_body["last_name"] == None):
+        return "The last name is missing", 404
+    if (request_body["phone"] == None):
+        return "The pnone number is missing", 404        
+    
+    user = User(request_body["name"], request_body["last_name"],request_body["email"], request_body["password"], request_body["phone"])
+    
+    db.session.add(user)
+    db.session.commit()
+
+    
+    
+    return jsonify({"user": user.serialize()}), 200
+
+@api.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    if email == None:
+        return "The email is missing", 404
+    if password == None:
+        return "The last password is missing", 404
+    user = User.query.filter_by(email=email).first()
+    if (user == None):
+        return "user does not exist", 404
+    if user.password != password:
+        return jsonify("wrong password"), 404
+    access_token = create_access_token(identity=email)
+    return jsonify(access_token=access_token)
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():

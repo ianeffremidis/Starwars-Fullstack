@@ -14,7 +14,7 @@ const Characters = () => {
           {store.people.map((value, i) => ( 
                 <div key={i} className="card p-0 m-3" style={{width: '15rem'}}>
                     <ReactImageFallback
-                    src={imageFromSw + value.uid + ".jpg"}
+                    src={value.image}
                     fallbackImage="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FStick_figure&psig=AOvVaw2hYo5zYGFbOpZArIzVA5E-&ust=1676804849870000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCIDQnf72nv0CFQAAAAAdAAAAABAa"
                     initialImage=""
                     alt="cool image should be here"
@@ -23,12 +23,12 @@ const Characters = () => {
                         <div className="card-body">
                             <h5 className="card-title">{value.name}</h5>
                                 <div className="d-flex justify-content-between">
-                                <Link to={`/charDetails/${value.uid}`}>
+                                <Link to={`/charDetails/${value.id}`}>
 						                    <button href="#" className="btn btn-outline-dark">
 							                Learn more!
 						                 </button>
 					                </Link>
-                                    <button type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.uid, "character")} >
+                                    <button type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.id, "character")} >
                                     
                                     {mapFav.includes(value.name) ? <i key={i} className="fa-solid fa fa-heart"></i> : <i key={i} className="far fa-heart"></i>}
                                     </button>

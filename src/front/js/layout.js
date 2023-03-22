@@ -7,6 +7,8 @@ import { Demo } from "./pages/demo";
 import CharDetails from "./pages/charDetails";
 import PlanetDetails from "./pages/planetDetails";
 import VehicleDetails from "./pages/vehicleDetails";
+import { Login } from "./pages/login";
+import { Signup } from "./pages/signup";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -26,14 +28,17 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<Login />} path="/login" />
+                        <Route element={<Signup />} path="/signup" />
                         <Route element={<CharDetails />} path="/charDetails/:id" />
                         <Route element={<PlanetDetails />} path="/planetDetails/:id" />
                         <Route element={<VehicleDetails />} path="/vehicleDetails/:id" />
                         
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route element={<h1>Not found!</h1>} path="*" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
+            
             </BrowserRouter>
         </div>
     );

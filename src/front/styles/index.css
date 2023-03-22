@@ -1,3 +1,28 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+/* 
+    General Styles
+*/
+@import url('https://fonts.cdnfonts.com/css/star-wars');
+
+.card-img-top{
+    height: 17rem;
+    width:100%; 
+    object-fit: cover;
+}
+.card-img-topi{
+    height: 20rem;
+    width:100%; 
+    object-fit: cover;
+}
+.text {
+    font-family: 'Star Wars', sans-serif;
+    color: red;
+}
+
+.img-fluid {
+    height: 30rem;
+    width:80%; 
+    object-fit: cover;
+}

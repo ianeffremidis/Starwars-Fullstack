@@ -15,7 +15,7 @@ const Planets = () => {
         <div key={i} className="card p-0 m-3" style={{width: '15rem'}}>
         
         <ReactImageFallback
-                    src={imageFromSw + value.uid + ".jpg"}
+                    src={value.image}
                     fallbackImage="https://png.pngitem.com/pimgs/s/170-1707876_panda-rounded-face-svg-clip-arts-funny-cartoon.png"
                     initialImage=""
                     alt="cool image should be here"
@@ -24,12 +24,12 @@ const Planets = () => {
         <h5 className="card-title">{value.name}</h5>
      
         <div className="d-flex justify-content-between">
-					<Link to={`/planetDetails/${value.uid}`}>
+					<Link to={`/planetDetails/${value.id}`}>
 						<button href="#" className="btn btn-outline-dark">
                             Learn more!
 						</button>
 					</Link>
-        <button key={i} type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.uid, "planet")}>
+        <button key={i} type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.id, "planet")}>
         {mapFav.includes(value.name) ? <i key={i} className="fa-solid fa fa-heart"></i> : <i key={i} className="far fa-heart"></i>}
         </button>
 				</div>

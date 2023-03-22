@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -10,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			singlePlanet: null,
 			singleVehicle: null,
 			favorites: [],
+			token:null,
 			demo: [
 				{
 					title: "FIRST",
@@ -32,13 +34,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  "Content-Type": "application/json"
 					}	
 				  };
-				  fetch("https://www.swapi.tech/api/people?page=1&limit=100", opts)
+				  fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/all_characters", opts)
 					.then((resp) => {
 					  if (resp.status === 200) return resp.json();
 					})
 					.then((data) => {
 					   console.log(data, "fetch people")
-					   setStore({people: data.results})
+					   setStore({people: data})
 					})
 					.catch((error) => {
 					  console.error("There was an error fetching people", error);			
@@ -47,12 +49,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPlanets: () => {
 				try {
-					return fetch("https://www.swapi.tech/api/planets?page=1&limit=100", {
+					return fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/all_planets", {
 						method: "GET",
 						redirect: "follow"
 					})
 						.then(resp => resp.json())
-						.then(data => setStore({ planets: data.results}));
+						.then(data => setStore({ planets: data}));
 				} catch (error) {
 					return [];
 				}
@@ -60,12 +62,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getVehicles: () => {
 				try {
-					return fetch("https://www.swapi.tech/api/vehicles?page=1&limit=100", {
+					return fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/all_vehicles", {
 						method: "GET",
 						redirect: "follow"
 					})
 						.then(resp => resp.json())
-						.then(data => setStore({ vehicles: data.results}));
+						.then(data => setStore({ vehicles: data}));
 				} catch (error) {
 					return [];
 				}
@@ -73,13 +75,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getPerson: id => {
 				try {
-					return fetch(`https://www.swapi.tech/api/people/${id}`, {
+					return fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/character/${id}`, {
 						method: "GET",
 						redirect: "follow"
 					})
 						.then(resp => resp.json())
 						.then(data => 
-							setStore({ person: data.result}));
+							setStore({ person: data}));
 				} catch (error) {
 					return [];
 				}
@@ -87,12 +89,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getSinglePlanet: (id) => {
 				try {
-					return fetch(`https://www.swapi.tech/api/planets/${id}`, {
+					return fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/planet/${id}`, {
 						method: "GET",
 						redirect: "follow"
 					})
 						.then(resp => resp.json())
-						.then(data => setStore({ singlePlanet: data.result}));
+						.then(data => setStore({ singlePlanet: data}));
 				} catch (error) {
 					return [];
 				}
@@ -100,12 +102,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getSingleVehicle: (id) => {
 				try {
-					return fetch(`https://www.swapi.tech/api/vehicles/${id}`, {
+					return fetch(`https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/vehicle/${id}`, {
 						method: "GET",
 						redirect: "follow"
 					})
 						.then(resp => resp.json())
-						.then(data => setStore({ singleVehicle: data.result}));
+						.then(data => setStore({ singleVehicle: data}));
 				} catch (error) {
 					return [];
 				}
@@ -140,6 +142,70 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const newFav = [...favorites]
 				newFav.splice(itemIndex,1)
 				setStore({favorites: newFav})
+			},
+
+			logIn: (email, password) => {
+				const opts = {
+				  method: "POST",
+				  headers: {
+					"Content-type": "application/json"
+				  },
+				  body: JSON.stringify({
+					email: email,
+					password: password,
+				  }),
+				};
+				fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/login", opts)
+				  .then((resp) => {
+					if (resp.status === 200) return resp.json();
+				  })
+				  .then((data) => {
+					sessionStorage.setItem("token", data.access_token);
+					setStore({ token: data.access_token })
+				  })
+				  .catch((error) => {
+					console.error("There was an error", error);
+					
+				  });
+			  },
+			  syncTokenFromLocal: () =>{
+				const token = sessionStorage.getItem("token")
+				if (token && token!="" && token != undefined){
+					setStore({ token: token})
+					console.log("token updated from session storage")
+				} 
+			},
+			logout: () =>{
+				sessionStorage.removeItem("token")
+				setStore({ token: null})
+				console.log("logged out")
+				 
+			},
+
+			registerUser: (name, last_name, email, password, phone) => {
+				const opts = {
+				  method: "POST",
+				  headers: {
+					"Content-type": "application/json",
+				  },
+				  body: JSON.stringify({
+					name: name,
+					last_name: last_name,
+					email: email,
+					password: password,
+					phone: phone
+				  }),
+				};
+				fetch("https://3001-ianeffremid-starwarsful-wj9idm3y5l9.ws-eu90.gitpod.io/api/register", opts)
+				  .then((resp) => {
+					if (resp.status === 200) return resp.json();
+				  })
+				  .then((data) => {
+					console.log(data)
+				  })
+				  .catch((error) => {
+					console.error("There was an error", error);
+				  });
 			},
 
 			// Use getActions to call a function within a fuction

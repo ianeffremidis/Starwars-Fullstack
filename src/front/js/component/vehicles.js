@@ -13,7 +13,7 @@ const Vehicles = () => {
             {store.vehicles.map((value, i) => ( 
         <div key={i} className="card p-0 m-3" style={{width: '15rem'}}>
             <ReactImageFallback
-                    src={imageFromSw + value.uid + ".jpg"}
+                    src={value.image}
                     fallbackImage="https://media.istockphoto.com/id/1152232977/photo/crashed-car-in-front-side-car-insurance-concept.jpg?s=612x612&w=0&k=20&c=Oyz_YgXOoK4Ayd7N7IuSgBCXFfSTgyyNAkhGTeZq3Uo="
                     initialImage=""
                     alt="cool image should be here"
@@ -22,12 +22,12 @@ const Vehicles = () => {
         <h5 className="card-title">{value.name}</h5>
        
         <div className="d-flex justify-content-between">
-					<Link to={`/vehicledetails/${value.uid}`}>
+					<Link to={`/vehicledetails/${value.id}`}>
 						<button href="#" className="btn btn-outline-dark" >
                             Learn more!
 						</button>
 					</Link>
-        <button key={i} type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.uid, "vehicle")}>
+        <button key={i} type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.id, "vehicle")}>
         {mapFav.includes(value.name) ? <i key={i} className="fa-solid fa fa-heart"></i> : <i key={i} className="far fa-heart"></i>}
         </button>
 				</div>

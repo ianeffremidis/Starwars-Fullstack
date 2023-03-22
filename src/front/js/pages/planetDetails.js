@@ -18,14 +18,14 @@ const PlanetsDetails = () => {
 
             <div className="container">
                 <div className="w-100 mt-4">
-                    <h1 className="text-dark">{store.singlePlanet.properties.name}</h1>
+                    <h1 className="text-dark">{store.singlePlanet.name}</h1>
                  </div>
                 <div className="card mb-3" style={{maxwidth: "540px"}}>
                     <div className="row g-0">
                         <div className="col-md-4">
                            
                             <ReactImageFallback
-                                src={imageFromSw + + id + ".jpg"}
+                                src={store.singlePlanet.image}
                                 fallbackImage="https://png.pngitem.com/pimgs/s/170-1707876_panda-rounded-face-svg-clip-arts-funny-cartoon.png"
                                 initialImage=""
                                 alt="cool image should be here"
@@ -34,14 +34,11 @@ const PlanetsDetails = () => {
                         <div className="col-md-8">
                             <div className="card-body">
                                 <h1 className="card-title text-dark fs-1"></h1>
-                                <p className="card-text text-dark fs-5"><strong>Diameter: </strong>{store.singlePlanet.properties.diameter}</p>
-                                <p className="text-dark fs-5"><strong>Rotation period: </strong>{store.singlePlanet.properties.rotation_period}</p>
-                                <p className="text-dark fs-5"><strong>Orbital period: </strong>{store.singlePlanet.properties.orbital_period}</p>
-                                <p className="text-dark fs-5"><strong>Gravity: </strong>{store.singlePlanet.properties.gravity}</p>
-                                <p className="text-dark fs-5"><strong>Population: </strong>{store.singlePlanet.properties.population}</p>
-                                <p className="text-dark fs-5"><strong>Climate: </strong>{store.singlePlanet.properties.climate}</p>
-                                <p className="text-dark fs-5"><strong>Terrain: </strong>{store.singlePlanet.properties.terrain}</p>
-                                <p className="text-dark fs-5"><strong>Surface Water: </strong>{store.singlePlanet.properties.surface_water}</p>
+                                <p className="text-dark fs-5"><strong>Rotation period: </strong>{store.singlePlanet.rotation_period}</p>
+                                <p className="text-dark fs-5"><strong>Gravity: </strong>{store.singlePlanet.gravity}</p>
+                                <p className="text-dark fs-5"><strong>Population: </strong>{store.singlePlanet.population}</p>
+                                <p className="text-dark fs-5"><strong>Climate: </strong>{store.singlePlanet.climate}</p>
+                                <p className="text-dark fs-5"><strong>Surface Water: </strong>{store.singlePlanet.surface_water}</p>
                                 <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                         </div>                     
