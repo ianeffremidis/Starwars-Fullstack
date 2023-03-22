@@ -6,6 +6,8 @@ import ReactImageFallback from "react-image-fallback";
 const Planets = () => {
     const {store, actions} = useContext(Context);
     const mapFav = store.favorites.map(item=>item.name)
+    const token = store.token
+    const user_id = store.user_id
     const imageFromSw = "https://starwars-visualguide.com/assets/img/planets/"
     const placeholderImage ='https://www.google.com/url?sa=i&url=https%3A%2F%2Fstock.adobe.com%2Fau%2Fsearch%3Fk%3Dtomato&psig=AOvVaw33uIHLPXfXI-fzXl3KZkyF&ust=1676757938716000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOChkJ3Inf0CFQAAAAAdAAAAABAD'
 
@@ -29,9 +31,14 @@ const Planets = () => {
                             Learn more!
 						</button>
 					</Link>
-        <button key={i} type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.id, "planet")}>
-        {mapFav.includes(value.name) ? <i key={i} className="fa-solid fa fa-heart"></i> : <i key={i} className="far fa-heart"></i>}
-        </button>
+                    {token && token!="" && token!=undefined ?
+                                    <button type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.id, "planet", user_id)} >                               
+                                    {mapFav.includes(value.name) ? <i key={i} className="fa-solid fa fa-heart"></i> : <i key={i} className="far fa-heart"></i>}                                                                    
+                                    </button>:
+                                    <button type="button" className="btn btn-outline-secondary disabled" >                               
+                                    <i key={i} className="far fa-heart"></i>
+                                    </button>
+                                    }
 				</div>
         </div>
         </div>

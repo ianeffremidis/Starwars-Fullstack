@@ -7,6 +7,8 @@ import ReactImageFallback from "react-image-fallback";
 const Vehicles = () => {
     const {store, actions} = useContext(Context);
     const mapFav = store.favorites.map(item=>item.name)
+    const token = store.token
+    const user_id = store.user_id
     const imageFromSw = "https://starwars-visualguide.com/assets/img/vehicles/"
     return(
         <div className="row d-flex flex-column" style={{height: "28rem", overflowX:"auto"}}>
@@ -27,9 +29,14 @@ const Vehicles = () => {
                             Learn more!
 						</button>
 					</Link>
-        <button key={i} type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.id, "vehicle")}>
-        {mapFav.includes(value.name) ? <i key={i} className="fa-solid fa fa-heart"></i> : <i key={i} className="far fa-heart"></i>}
-        </button>
+                    {token && token!="" && token!=undefined ?
+                                    <button type="button" className="btn btn-outline-danger" onClick={() => actions.addFavorites(value.name, value.id, "vehicle", user_id)} >                               
+                                    {mapFav.includes(value.name) ? <i key={i} className="fa-solid fa fa-heart"></i> : <i key={i} className="far fa-heart"></i>}                                                                    
+                                    </button>:
+                                    <button type="button" className="btn btn-outline-secondary disabled" >                               
+                                    <i key={i} className="far fa-heart"></i>
+                                    </button>
+                                    }
 				</div>
         </div>
         </div>

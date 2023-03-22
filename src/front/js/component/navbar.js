@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,15 @@ import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
 	const {store, actions} = useContext(Context);
 	const token = store.token
+	const user_id = store.user_id
 	const navigate = useNavigate();
 	const goLogin = () =>{
 		navigate("/login")
 	}
+
+	useEffect(() => {
+        actions.getFavourites(user_id)
+      }, [user_id]);
 	
 
 	return (
@@ -37,7 +42,7 @@ export const Navbar = () => {
 									{item.type==="vehicle" && <Link to={`/vehicleDetails/${item.id}`}>{item.name}</Link>}
 
 									
-									<button className="btn btn-outline-dark border-0 btn-sm" > <i className="fa-solid fa fa-trash" onClick={()=> actions.deleteFavorites(i)}></i></ button>
+									<button className="btn btn-outline-dark border-0 btn-sm" > <i className="fa-solid fa fa-trash" onClick={()=> actions.deleteFavorites(i, item.id, user_id, item.type)}></i></ button>
 									</a>
 								</li>
 								)
@@ -53,7 +58,7 @@ export const Navbar = () => {
 					<button type="button" className="btn btn-outline-dark me-5" onClick={goLogin}>
 						Log in to add Favorites
 					</button>
-					<a href="/signup" className="text-primary fw-bold">
+					<a href="/signup" className="text-primary fw-bold me-5">
 					Register
 				 	 </a></div>  }
 			</nav>
